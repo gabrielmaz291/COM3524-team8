@@ -2,6 +2,7 @@ from separator import _Separator
 import gui_utils
 from configcomponent import _ConfigUIComponent
 from generationsui import _GenerationsUI
+from winddirectionui import _WindDirectionUI
 from cagraph import _CAGraph
 from initialgridwindow import _EditInitialGridWindow
 from initialgridui import _InitialGridUI

@@ -17,7 +17,7 @@ import capyle.utils as utils
 import numpy as np
 
 
-def transition_func(grid, neighbourstates, neighbourcounts):
+def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     
     # town == states == 0, water == states == 1, dense_forest == states == 2, canyon == states == 3,
     # chaparral == states == 4, powerplant == states == 5, incinerator == states == 6,burning_dense_forest == states == 7,
@@ -41,14 +41,13 @@ def transition_func(grid, neighbourstates, neighbourcounts):
 
 
     # unpack state counts for clarity
-    burning_dense_forest, burning_canyon, burning_chaparral = neighbourcounts
-    
+    #burning_dense_forest, burning_canyon, burning_chaparral = neighbourcounts
    
     # Set all cells to 0 (dead)
     grid[:, :] = 0
     
     # Set cells to 0 where sick cells die of isolation or sickness
-    grid[isolation_death | sickness_death] = 0
+    #grid[isolation_death | sickness_death] = 0
 
     
     return grid

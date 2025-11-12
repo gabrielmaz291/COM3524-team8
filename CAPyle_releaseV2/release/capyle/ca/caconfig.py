@@ -16,6 +16,7 @@ class CAConfig(object):
         self.rule_num = None
         self.state_colors = None
         self.num_generations = None
+        self.wind_direction = None
         self.nhood_arr = None
         self.initial_grid = None
         # default wrapping behaviour is True
@@ -30,6 +31,10 @@ class CAConfig(object):
         # number of generations
         if self.num_generations is None:
             self.num_generations = 100
+
+        # wind direction
+        if ((self.title == "Forest fire") & (self.wind_direction is None)):
+            self.wind_direction = 0
 
         # grid dimensions
         if self.grid_dims is None:
