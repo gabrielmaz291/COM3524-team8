@@ -160,6 +160,11 @@ class Grid2D(Grid):
         # return n arrays where n is the number of states
         nc = self.count_neighbours(ns)
 
+        wd = self.ca_config.wind_direction
+
+        if self.ca_config.wind_direction is not None:
+            self.additional_args = [self.ca_config.wind_direction]
+
         # apply the user's transition function
         # passing in the states and counts to allow complex rules
         # if the user supplied any addition arguments, pass them here

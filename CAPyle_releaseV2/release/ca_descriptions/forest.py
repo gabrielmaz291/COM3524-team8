@@ -17,7 +17,7 @@ import capyle.utils as utils
 import numpy as np
 
 
-def transition_func(grid, neighbourstates, neighbourcounts):
+def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     
     # town == states == 0, water == states == 1, dense_forest == states == 2, canyon == states == 3,
     # chaparral == states == 4, powerplant == states == 5, incinerator == states == 6,burning_dense_forest == states == 7,
@@ -39,15 +39,16 @@ def transition_func(grid, neighbourstates, neighbourcounts):
     # Burned chaparral - 0.75,0.75,0.75
     # Burned town - 1,0,0
 
+    # properly unpack states
+    town, water, dense_forest, canyon, chaparral, powerplant, incinerator, burning_dense_forest, burning_canyon, burning_chaparral, burned_dense_forest, burned_canyon, burned_chaparral, burned_town = neighbourcounts
 
     # unpack state counts for clarity
-    alive_neighbours, burning_neighbours, burned_neighbours= neighbourcounts
-    alive_neighbours = (neighbourstates[2] + neighbourstates[3] + neighbourstates[4] )
+    #alive_neighbours, burning_neighbours, burned_neighbours= neighbourcounts
+    alive_neighbours = town + water + dense_forest + canyon + chaparral
     
     # Powerplant and Incinerator considered burning neighbours for purposes of igniting surroundings
-    burning_neighbours = (neighbourstates[5] + neighbourstates[6] + neighbourstates[7] + neighbourstates[8] + neighbourstates[9])
-    burned_neighbours = (neighbourstates[10] + neighbourstates[11] + neighbourstates[12] + neighbourstates[13])
-    
+    burning_neighbours = burning_dense_forest + burning_canyon + burning_chaparral + powerplant + incinerator
+    burned_neighbours = burned_dense_forest + burned_canyon + burned_chaparral + burned_town
     ### Town rules: Burns if at least one burning neighbour, else survives
     
     # if town and burning neighbours less than 1, survive
@@ -202,7 +203,7 @@ def transition_func(grid, neighbourstates, neighbourcounts):
     grid[incinerator_survive] = 6
 
     # Set cells to 0 where sick cells die of isolation or sickness
-    grid[isolation_death | sickness_death] = 0
+    #grid[isolation_death | sickness_death] = 0
 
     ### Burning dense forest rules: Small chance to burn out to become burned dense forest, else survives
     

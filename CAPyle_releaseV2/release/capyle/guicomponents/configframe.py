@@ -3,7 +3,7 @@ import numpy as np
 from capyle.utils import gens_to_dims, alerterror, alertcontinue
 from capyle.guicomponents import (_GenerationsUI, _GridDimensionsUI,
                                   _Separator, _NeighbourhoodUI, _RuleNumberUI,
-                                  _StateColorsUI, _InitialGridUI)
+                                  _StateColorsUI, _InitialGridUI, _WindDirectionUI)
 
 
 class _ConfigFrame(tk.Frame):
@@ -46,6 +46,13 @@ class _ConfigFrame(tk.Frame):
 
         self.separator()
 
+         # Wind direction selector
+        if self.ca_config.title == "Forest fire":
+            self.wind_direction_entry = _WindDirectionUI(self)
+            self.wind_direction_entry.pack(fill=tk.BOTH)
+
+            self.separator()
+
         # Colour selector
         self.state_colors = _StateColorsUI(self, self.ca_config, self.ca_graph)
         self.state_colors.pack(fill=tk.BOTH)
@@ -71,6 +78,7 @@ class _ConfigFrame(tk.Frame):
     def get_config(self, ca_config, validate=False):
         """Get the config from the UI and store in a CAConfig object"""
         ca_config.num_generations = self.generations_entry.get_value()
+        ca_config.wind_direction = self.wind_direction_entry.get_value()
         ca_config.state_colors = self.state_colors.get_value()
 
         if ca_config.dimensions == 2:
