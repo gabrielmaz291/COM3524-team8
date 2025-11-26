@@ -272,6 +272,24 @@ def setup(args):
 
     # ----------------------------------------------------------------------
 
+    initial_grid = np.zeros((20,20), dtype=int)
+    initial_grid[0:20, 0:20] = 4  # chapparral
+
+    # Set up initial conditions
+    initial_grid[0, 1] = 5  # powerplant
+    initial_grid[0, 19] = 6  # incinerator
+    initial_grid[17, 5] = 0 # town
+    initial_grid[2:10, 2:5] = 2  # dense forest
+    initial_grid[2:3, 5:8] = 2  # dense forest
+    initial_grid[10:14, 2:10] = 2 # dense forest
+    initial_grid[4:8, 6:8] = 1 # water
+    initial_grid[16:18, 10:16] = 1 # water
+    initial_grid[4:13, 14:16] = 3 # canyon
+
+    config.initial_grid = initial_grid
+
+    # ----------------------------------------------------------------------
+
     if len(args) == 2:
         config.save()
         sys.exit()
@@ -288,6 +306,16 @@ def main():
 
     # Run the CA, save grid state every generation to timeline
     timeline = grid.run()
+
+    #Time-to-town detection
+    time_to_town = None
+
+    for gen, state in enumerate(timeline):
+        if (state == 13).any():  # burned town
+            time_to_town = gen
+            break
+
+    print("Time (generations) for fire to reach town:", time_to_town)
 
     # save updated config to file
     config.save()
