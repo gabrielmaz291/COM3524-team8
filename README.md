@@ -27,7 +27,7 @@ Once you run the command, the following menu should appear, allowing you to sele
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/CATool.png" width="200" style="border-radius: 8px;">
+  <img src="CAPyle_releaseV2/release/screenshots/README/CATool.png" width="500" style="border-radius: 8px;">
 </div>
 
   - The menu allows you to select from available tools.
