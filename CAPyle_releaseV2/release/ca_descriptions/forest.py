@@ -16,6 +16,16 @@ from capyle.ca import Grid2D, Neighbourhood, CAConfig, randomise2d
 import capyle.utils as utils
 import numpy as np
 
+frame_counter = 0
+
+
+def get_water_intervention_matrix():
+    matrix = np.full((40, 40), False, dtype=bool)
+    matrix[4, 10] = True
+    matrix[4, 11] = True
+    return matrix
+
+
 
 def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     
@@ -148,7 +158,23 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     
     # if burned town, survives
     burned_town_survive = (grid == 13)
-    
+
+    #Handle Water Intervention
+
+    water_intervention = get_water_intervention_matrix()
+
+    dense_forest_survive = dense_forest_survive | (burning_dense_forest_survive & water_intervention) 
+    burning_dense_forest_survive = burning_dense_forest_survive & ~water_intervention
+    dense_forest_ignite = dense_forest_ignite & ~water_intervention
+
+    chaparral_survive = chaparral_survive | (burning_chaparral_survive & water_intervention) 
+    burning_chaparral_survive = burning_chaparral_survive & ~water_intervention
+    chaparral_ignite = chaparral_ignite & ~water_intervention
+
+    canyon_survive = canyon_survive | (burning_canyon_survive & water_intervention) 
+    burning_canyon_survive = burning_canyon_survive & ~water_intervention
+    canyon_ignite = canyon_ignite & ~water_intervention
+
     ######################################################################################
     
     # Set all cells to 0 as fallback
@@ -247,6 +273,7 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     
     # Set cells to 13 where burned town survives
     grid[burned_town_survive] = 13
+
     
     return grid
 
