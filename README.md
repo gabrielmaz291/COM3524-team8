@@ -63,6 +63,15 @@ forest.py
 ### 3. Choosing the Ignition Scenario
 The ignition point is controlled in **forest.py** inside the **setup()** function.
 
+Both igntion scenarios (power plant and incinerator) are already defined.
+
+To select which scenario to run, simply **uncomment** the ignition point you want to enable and **comment out** the other.
+
+<div style="display: flex; align-items: flex-start; gap: 1rem;">
+
+  <img src="CAPyle_releaseV2/release/screenshots/README/IgnitionPoints.png.png" width="200" style="border-radius: 8px;">
+</div>
+
 #### Power Plant Ignition (Scenario 1)
 Ensure you have:
 
@@ -83,6 +92,19 @@ This puts a burning cell near the incinerator to start the wildfire spread towar
 
 ### 5. Running Intervention Scenarios
 
+### Short-Term Intervention - Aerial Water Drop
+
+#### Long-Term Intervention - Extended Dense Forest
+The modified initial grid with an extended dense forest is controlled in **forest.py** inside the **setup()** function.
+
+The conditions of the modified grid is already defined.
+
+To select this grid, simply **uncomment** the addition dense forest definitions.
+
+<div style="display: flex; align-items: flex-start; gap: 1rem;">
+
+  <img src="CAPyle_releaseV2/release/screenshots/README/LongIntervention.png.png.png" width="200" style="border-radius: 8px;">
+</div>
 
 ## Author
 Adlina Rusli
