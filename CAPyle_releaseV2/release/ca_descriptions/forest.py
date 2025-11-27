@@ -267,23 +267,23 @@ def setup(args):
                            (0,0.5,0.5), (0.5,0.5,0.5), (1,0.5,0), (1,0.5,0), (0.75, 0.5,0), 
                            (0.25,0.25,0.25), (0.25, 0.25, 0.25), (0.75,0.75,0.75), (1,0,0)]
     # config.num_generations = 150
-    config.grid_dims = (50,50)
+    config.grid_dims = (40,40)
 
     # ----------------------------------------------------------------------
 
-    initial_grid = np.zeros((50,50), dtype=int)
-    initial_grid[0:50, 0:50] = 4  # chapparral
+    initial_grid = np.zeros((40,40), dtype=int)
+    initial_grid[0:40, 0:40] = 4  # chapparral
 
     # Set up initial conditions
-    initial_grid[0, 5] = 5  # powerplant
-    initial_grid[0, 49] = 6  # incinerator
-    initial_grid[44:46, 14:16] = 0 # town
-    initial_grid[5:35, 5:14] = 2  # dense forest
-    initial_grid[5:8, 13:20] = 2  # dense forest
-    initial_grid[25:35, 13:25] = 2 # dense forest
-    initial_grid[10:20, 17:20] = 1 # water
-    initial_grid[41:44, 25:40] = 1 # water
-    initial_grid[10:33, 35:39] = 3 # canyon
+    initial_grid[0, 4] = 5  # powerplant
+    initial_grid[0, 39] = 6  # incinerator
+    initial_grid[35:37, 11:13] = 0 # town
+    initial_grid[4:20, 4:10] = 2  # dense forest
+    initial_grid[4:7, 10:16] = 2  # dense forest
+    initial_grid[20:28, 4:20] = 2 # dense forest
+    initial_grid[32:34, 19:33] = 1 # water
+    initial_grid[8:16, 14:16] = 1 # water
+    initial_grid[8:26, 28:31] = 3 # canyon
 
     config.initial_grid = initial_grid
 
