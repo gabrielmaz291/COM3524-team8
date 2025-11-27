@@ -69,7 +69,7 @@ To select which scenario to run, simply **uncomment** the ignition point you wan
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/IgnitionPoints.png.png" width="200" style="border-radius: 8px;">
+  <img src="CAPyle_releaseV2/release/screenshots/README/IgnitionPoints.png" width="200" style="border-radius: 8px;">
 </div>
 
 #### Power Plant Ignition (Scenario 1)
@@ -103,7 +103,7 @@ To select this grid, simply **uncomment** the addition dense forest definitions.
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/LongIntervention.png.png.png" width="200" style="border-radius: 8px;">
+  <img src="CAPyle_releaseV2/release/screenshots/README/LongIntervention.png" width="200" style="border-radius: 8px;">
 </div>
 
 ## Author
