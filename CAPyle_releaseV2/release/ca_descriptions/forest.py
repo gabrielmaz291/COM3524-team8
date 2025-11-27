@@ -151,7 +151,6 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     
     ######################################################################################
     
-    
     # Set all cells to 0 as fallback
     grid[:, :] = 0
     
@@ -268,23 +267,23 @@ def setup(args):
                            (0,0.5,0.5), (0.5,0.5,0.5), (1,0.5,0), (1,0.5,0), (0.75, 0.5,0), 
                            (0.25,0.25,0.25), (0.25, 0.25, 0.25), (0.75,0.75,0.75), (1,0,0)]
     # config.num_generations = 150
-    config.grid_dims = (40,40)
+    config.grid_dims = (50,50)
 
     # ----------------------------------------------------------------------
 
-    initial_grid = np.zeros((20,20), dtype=int)
-    initial_grid[0:20, 0:20] = 4  # chapparral
+    initial_grid = np.zeros((50,50), dtype=int)
+    initial_grid[0:50, 0:50] = 4  # chapparral
 
     # Set up initial conditions
-    initial_grid[0, 1] = 5  # powerplant
-    initial_grid[0, 19] = 6  # incinerator
-    initial_grid[17, 5] = 0 # town
-    initial_grid[2:10, 2:5] = 2  # dense forest
-    initial_grid[2:3, 5:8] = 2  # dense forest
-    initial_grid[10:14, 2:10] = 2 # dense forest
-    initial_grid[4:8, 6:8] = 1 # water
-    initial_grid[16:18, 10:16] = 1 # water
-    initial_grid[4:13, 14:16] = 3 # canyon
+    initial_grid[0, 5] = 5  # powerplant
+    initial_grid[0, 49] = 6  # incinerator
+    initial_grid[44:46, 14:16] = 0 # town
+    initial_grid[5:35, 5:14] = 2  # dense forest
+    initial_grid[5:8, 13:20] = 2  # dense forest
+    initial_grid[25:35, 13:25] = 2 # dense forest
+    initial_grid[10:20, 17:20] = 1 # water
+    initial_grid[41:44, 25:40] = 1 # water
+    initial_grid[10:33, 35:39] = 3 # canyon
 
     config.initial_grid = initial_grid
 
