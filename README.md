@@ -8,7 +8,7 @@ This project investigates how fire spreads from two industrial ignition sources,
 To run the simulation, you need:
 
 - [Python 3.8+](https://www.python.org/downloads/)
-- [NumPy]
+- NumPy
 - CAPyle CA Simulator (provided in the module)
 - `pip` (Python package manager for installing necessary dependencies)
 - Git (to clone this repository)
@@ -27,7 +27,7 @@ Once you run the command, the following menu should appear, allowing you to sele
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="https://github.com/user-attachments/assets/62b99fdb-c21e-4d47-add8-1b6166f2dda6" alt="Tools Menu Screenshot" width="500" style="border-radius: 8px;">
+  <img src="CAPyle_releaseV2/release/screenshots/README images/CATool.png" width="500" style="border-radius: 8px;">
 </div>
 
   - The menu allows you to select from available tools.
@@ -39,6 +39,12 @@ Once you run the command, the following menu should appear, allowing you to sele
 In the CAPyle interface;
 
 - Go to File → Open
+
+<div style="display: flex; align-items: flex-start; gap: 1rem;">
+
+  <img src="CAPyle_releaseV2/release/screenshots/README images/LoadFile.png" width="500" style="border-radius: 8px;">
+</div>
+
 - Select the file: 
 
 ```bash
@@ -46,10 +52,16 @@ forest.py
 ```
 
 - Go to Simulation → Run Configuration
-- Start the simulation by clicking the play button.
+
+<div style="display: flex; align-items: flex-start; gap: 1rem;">
+
+  <img src="CAPyle_releaseV2/release/screenshots/README images/RunSimulation.png" width="500" style="border-radius: 8px;">
+</div>
+
+- Start the simulation by clicking the play button
 
 ### 3. Choosing the Ignition Scenario
-The ignition point is controlled in forest.py inside the setup() function.
+The ignition point is controlled in **forest.py** inside the **setup()** function.
 
 #### Power Plant Ignition (Scenario 1)
 Ensure you have:
@@ -57,7 +69,7 @@ Ensure you have:
 ```bash
 initial_grid[1, 5] = 9
 ```
-This puts a burning cell near the power plant
+This puts a burning cell near the power plant to start the wildfire spread towards town.
 
 #### Incinerator Ignition (Scenario 1)
 Ensure you have:
@@ -65,7 +77,7 @@ Ensure you have:
 ```bash
 initial_grid[1, 49] = 9
 ```
-This puts a burning cell near the incinerator
+This puts a burning cell near the incinerator to start the wildfire spread towards town.
 
 ### 4. Running Wind Scenarios
 
@@ -73,4 +85,7 @@ This puts a burning cell near the incinerator
 
 
 ## Author
-Ayesha Sana, Department of Computer Science  
+Adlina Rusli
+Gabriel Mazierski
+Cailean Allway
+Antoni Nikolak
