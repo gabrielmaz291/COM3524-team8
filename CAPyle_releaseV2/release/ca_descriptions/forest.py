@@ -188,7 +188,6 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
 
     ######################################################################################
     
-    
     # Set all cells to 0 as fallback
     grid[:, :] = 0
     
@@ -311,6 +310,24 @@ def setup(args):
 
     # ----------------------------------------------------------------------
 
+    initial_grid = np.zeros((40,40), dtype=int)
+    initial_grid[0:40, 0:40] = 4  # chapparral
+
+    # Set up initial conditions
+    initial_grid[0, 4] = 5  # powerplant
+    initial_grid[0, 39] = 6  # incinerator
+    initial_grid[35:37, 11:13] = 0 # town
+    initial_grid[4:20, 4:10] = 2  # dense forest
+    initial_grid[4:7, 10:16] = 2  # dense forest
+    initial_grid[20:28, 4:20] = 2 # dense forest
+    initial_grid[32:34, 19:33] = 1 # water
+    initial_grid[8:16, 14:16] = 1 # water
+    initial_grid[8:26, 28:31] = 3 # canyon
+
+    config.initial_grid = initial_grid
+
+    # ----------------------------------------------------------------------
+
     if len(args) == 2:
         config.save()
         sys.exit()
@@ -327,6 +344,16 @@ def main():
 
     # Run the CA, save grid state every generation to timeline
     timeline = grid.run()
+
+    #Time-to-town detection
+    time_to_town = None
+
+    for gen, state in enumerate(timeline):
+        if (state == 13).any():  # burned town
+            time_to_town = gen
+            break
+
+    print("Time (generations) for fire to reach town:", time_to_town)
 
     # save updated config to file
     config.save()
