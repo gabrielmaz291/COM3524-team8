@@ -285,6 +285,11 @@ def setup(args):
     initial_grid[8:16, 14:16] = 1 # water
     initial_grid[8:26, 28:31] = 3 # canyon
 
+    #Long-term Intervention - Extended Dense Forest Area
+    #initial_grid[28:30, 4:33] = 2  # dense forest
+    #initial_grid[20:28, 20:27] = 2  # dense forest
+    #initial_grid[29:39, 4:10] = 2  # dense forest
+
     config.initial_grid = initial_grid
 
     # ----------------------------------------------------------------------
