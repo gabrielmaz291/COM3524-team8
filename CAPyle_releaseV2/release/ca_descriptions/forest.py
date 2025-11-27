@@ -26,17 +26,6 @@ def get_water_intervention_matrix():
     return matrix
 
 
-    
-
-
-# def handle_intervention():
-#     frame_counter+=1
-#     if (frame_counter == 15):
-
-
-    
-
-    
 
 def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     
@@ -285,7 +274,6 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     # Set cells to 13 where burned town survives
     grid[burned_town_survive] = 13
 
-    print("HELLLOOOOOOOOOOO")
     
     return grid
 
