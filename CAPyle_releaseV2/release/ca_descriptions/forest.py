@@ -47,7 +47,7 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     alive_neighbours = town + water + dense_forest + canyon + chaparral
     
     # Powerplant and Incinerator considered burning neighbours for purposes of igniting surroundings
-    burning_neighbours = burning_dense_forest + burning_canyon + burning_chaparral + powerplant + incinerator
+    burning_neighbours = burning_dense_forest + burning_canyon + burning_chaparral
     burned_neighbours = burned_dense_forest + burned_canyon + burned_chaparral + burned_town
     ### Town rules: Burns if at least one burning neighbour, else survives
     
@@ -273,6 +273,10 @@ def setup(args):
 
     initial_grid = np.zeros((40,40), dtype=int)
     initial_grid[0:40, 0:40] = 4  # chapparral
+
+    #Define Ignition Points
+    initial_grid[1, 4] = 9  # powerplant as ignition point
+    #initial_grid[1, 39] = 9  # incinerator as ignition point
 
     # Set up initial conditions
     initial_grid[0, 4] = 5  # powerplant
