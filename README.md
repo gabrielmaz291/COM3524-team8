@@ -2,7 +2,7 @@
 
 This repository contains the adapted Cellular Automata (CA) model used to simulate wildfire spread across heterogenous terrain, based on the COM3524 "Bio-Inspired Computing" assignment brief.
 
-This project investigates how fire spreads from two industrial ignition sources, a power plant and an incinerator, towards a nearby town, under different environmental conditions.
+This project investigates how fire spreads from two industrial ignition sources, a power plant and an incinerator, towards a nearby town, under different terrains such as dense forest, canyon, chapparal, and water.
 
 ## Prerequisites
 To run the simulation, you need:
@@ -27,7 +27,7 @@ Once you run the command, the following menu should appear, allowing you to sele
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/CATool.png" width="500" style="border-radius: 8px;">
+  <img src="screenshots/README/CATool.png" width="500" style="border-radius: 8px;">
 </div>
 
   - The menu allows you to select from available tools.
@@ -42,7 +42,7 @@ In the CAPyle interface;
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/LoadFile.png" width="200" style="border-radius: 8px;">
+  <img src="screenshots/README/LoadFile.png" width="200" style="border-radius: 8px;">
 </div>
 
 - Select the file: 
@@ -55,7 +55,7 @@ forest.py
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/RunSimulation.png" width="200" style="border-radius: 8px;">
+  <img src="screenshots/README/RunSimulation.png" width="200" style="border-radius: 8px;">
 </div>
 
 - Start the simulation by clicking the play button
@@ -69,7 +69,7 @@ To select which scenario to run, simply **uncomment** the ignition point you wan
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/IgnitionPoints.png" width="500" style="border-radius: 8px;">
+  <img src="screenshots/README/IgnitionPoints.png" width="500" style="border-radius: 8px;">
 </div>
 
 #### Power Plant Ignition (Scenario 1)
@@ -80,7 +80,7 @@ initial_grid[1, 5] = 9
 ```
 This puts a burning cell near the power plant to start the wildfire spread towards town.
 
-#### Incinerator Ignition (Scenario 1)
+#### Incinerator Ignition (Scenario 2)
 Ensure you have:
 
 ```bash
@@ -92,7 +92,7 @@ This puts a burning cell near the incinerator to start the wildfire spread towar
 
 ### 5. Running Intervention Scenarios
 
-### Short-Term Intervention - Aerial Water Drop
+#### Short-Term Intervention - Aerial Water Drop
 
 #### Long-Term Intervention - Extended Dense Forest
 The modified initial grid with an extended dense forest is controlled in **forest.py** inside the **setup()** function.
@@ -105,6 +105,19 @@ To select this grid, simply **uncomment** the addition dense forest definitions.
 
   <img src="CAPyle_releaseV2/release/screenshots/README/LongIntervention.png" width="500" style="border-radius: 8px;">
 </div>
+
+### 6. Time-to-Town Measurement
+After the simulation finished, the program automatically calculates:
+
+**How many generations it takes for the fire to reach and burn the town**
+
+This is detected by checking when any cell becomes state 13 (burned town)
+
+Output appears in the terminal:
+
+```bash
+Time (generations) for fire to reach town: X 
+```
 
 ## Author
 Adlina Rusli
