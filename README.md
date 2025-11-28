@@ -55,7 +55,7 @@ forest.py
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="screenshots/README/RunSimulation.png" width="200" style="border-radius: 8px;">
+  <img src="CAPyle_releaseV2/release/screenshots/README/RunSimulation.png" width="200" style="border-radius: 8px;">
 </div>
 
 - Start the simulation by clicking the play button
