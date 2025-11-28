@@ -5,9 +5,9 @@ This repository contains the adapted Cellular Automata (CA) model used to simula
 This project investigates how fire spreads from two industrial ignition sources, a power plant and an incinerator, towards a nearby town, under different terrains such as dense forest, canyon, chapparal, and water.
 
 ## Files Modified throughout Project
-- forest.py (CAPyle_releaseV2/release/ca_descriptions/forest.py)
+- **forest.py** (CAPyle_releaseV2/release/ca_descriptions/forest.py)
 
-The following CAPyle files were minimally modified to support optional wind settings in the CA Tool UI.
+The following CAPyle files were minimally modified to support optional wind settings in the CA Tool UI:
 - **winddirectionui.py** (CAPyle_releaseV2\release\capyle\guicomponents\winddirectionui.py)
 - **configframe.py** (CAPyle_releaseV2\release\capyle\guicomponents\configframe.py)
 - **grid2d.py** (CAPyle_releaseV2\release\capyle\ca\grid2.py)
