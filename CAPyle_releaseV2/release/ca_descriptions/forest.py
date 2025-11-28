@@ -179,7 +179,7 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     global frame_counter
     frame_counter+=1
     
-    if(frame_counter == INCINERATOR_START_WATER_DROP_TIME):
+    if(frame_counter == POWER_PLANT_START_WATER_DROP_TIME):
 
         water_intervention = get_water_intervention_matrix()
 
