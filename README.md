@@ -109,7 +109,7 @@ To run the directional wind-bias simulations, use the **Wind Direction** input b
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
-  <img src="CAPyle_releaseV2/release/screenshots/README/WindBox.png" width="500" style="border-radius: 8px;">
+  <img src="CAPyle_releaseV2/release/screenshots/README/WindBox.png" width="200" style="border-radius: 8px;">
 </div>
 
 - No Wind:
