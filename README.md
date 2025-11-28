@@ -4,6 +4,14 @@ This repository contains the adapted Cellular Automata (CA) model used to simula
 
 This project investigates how fire spreads from two industrial ignition sources, a power plant and an incinerator, towards a nearby town, under different terrains such as dense forest, canyon, chapparal, and water.
 
+## Files Modified throughout Project
+- forest.py (CAPyle_releaseV2/release/ca_descriptions/forest.py)
+
+The following CAPyle files were minimally modified to support optional wind settings in the CA Tool UI.
+- **winddirectionui.py** (CAPyle_releaseV2\release\capyle\guicomponents\winddirectionui.py)
+- **configframe.py** (CAPyle_releaseV2\release\capyle\guicomponents\configframe.py)
+- **grid2d.py** (CAPyle_releaseV2\release\capyle\ca\grid2.py)
+
 ## Prerequisites
 To run the simulation, you need:
 
@@ -60,6 +68,14 @@ forest.py
 
 - Start the simulation by clicking the play button
 
+Note: 
+If the terminal displays:
+
+```bash
+Time (generations) for fire to reach town: None 
+```
+this indicates that the configuration did not load correctly. To fix this, reopen **Simulation → Run Configuration** to restart the simulation.
+
 ### 3. Choosing the Ignition Scenario
 The ignition point is controlled in **forest.py** inside the **setup()** function.
 
@@ -89,6 +105,29 @@ initial_grid[1, 39] = 9
 This puts a burning cell near the incinerator to start the wildfire spread towards town.
 
 ### 4. Running Wind Scenarios
+To run the directional wind-bias simulations, use the **Wind Direction** input box located at the **bottom-left** of the CA Tool Interface.
+
+<div style="display: flex; align-items: flex-start; gap: 1rem;">
+
+  <img src="CAPyle_releaseV2/release/screenshots/README/WindBox.png" width="500" style="border-radius: 8px;">
+</div>
+
+- No Wind:
+Leave the box **empty** (the value will be treated as None)
+
+- With Wind: 
+Enter any value from **0-7**, corresponding to the 8 Moore neighbourhood directions. 
+
+These directions indicate the direction where is wind coming from not where it is pointing to:
+
+- 0: NW(North-West)
+- 1: N(North)
+- 2: NE(North-East)
+- 3: W(West)
+- 4: E(East)
+- 5: SW(South-West)
+- 6: S(South)
+- 7: SE(South-East)
 
 ### 5. Running Intervention Scenarios
 
@@ -97,9 +136,25 @@ All the logic for this functionality is inside **forest.py**.
 
 The location of the water drop is selected inside the **get_water_intervention_matrix()** function. This function returns a matrix, where each element that is set to True indicates water being dropped there. 
 
-The frame at which the water gets dropped is stored inside the **INCINERATOR_START_WATER_DROP_TIME** and **POWER_PLANT_START_WATER_DROP_TIME** constants.
+The frame at which the water gets dropped is stored inside the constants:
+- **INCINERATOR_START_WATER_DROP_TIME**
+- **POWER_PLANT_START_WATER_DROP_TIME**
 
-If you want to simulate the incinerator starting the fire then **uncomment** the bottom matrix mutation and **comment** the top mutation in the **get_water_intervention_matrix()** function, and ensure the **INCINERATOR_START_WATER_DROP_TIME** constant is being used inside **transition_func()**, instead of **POWER_PLANT_START_WATER_DROP_TIME**. If you want to simulate, the power plant starting the fire, then do the opposite.
+<div style="display: flex; align-items: flex-start; gap: 1rem;">
+
+  <img src="CAPyle_releaseV2/release/screenshots/README/WaterDrop.png" width="500" style="border-radius: 8px;">
+</div>
+
+By default, both water-drop regions are deactivated.
+To simulate the corresponding water-drop region from the ignition point of:
+
+1. Incinerator
+- **Uncomment** the bottom matrix mutation in the **get_water_intervention_matrix()** function
+- Ensure the **INCINERATOR_START_WATER_DROP_TIME** constant is being used inside **transition_func()**, instead of **POWER_PLANT_START_WATER_DROP_TIME**. 
+
+2. Power Plant
+- **Uncomment** the top matrix mutation in the **get_water_intervention_matrix()** function
+- Ensure the **POWER_PLANT_START_WATER_DROP_TIME** constant is being used inside **transition_func()**, instead of **INCINERATOR_START_WATER_DROP_TIME**. 
 
 #### Long-Term Intervention - Extended Dense Forest
 The modified initial grid with an extended dense forest is controlled in **forest.py** inside the **setup()** function.
