@@ -1,4 +1,4 @@
-# Name: Conway's game of life
+# Name: Forest Fire CA Modelling
 # Dimensions: 2
 
 # --- Set up executable path, do not edit ---
@@ -39,9 +39,7 @@ def get_water_intervention_matrix():
     matrix[1:3, 35:40] = True 
     return matrix
 
-
-
-def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
+def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = None):
     
     # town == states == 0, water == states == 1, dense_forest == states == 2, canyon == states == 3,
     # chaparral == states == 4, powerplant == states == 5, incinerator == states == 6,burning_dense_forest == states == 7,
@@ -73,8 +71,22 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     # Powerplant and Incinerator considered burning neighbours for purposes of igniting surroundings
     burning_neighbours = burning_dense_forest + burning_canyon + burning_chaparral
     burned_neighbours = burned_dense_forest + burned_canyon + burned_chaparral + burned_town
+
+    # Directional Wind Bias Implementation
+    if wind_direction is not None:
+        burning_states = [7, 8, 9]  # burning_dense_forest, burning_canyon, burning_chaparral
+        opposite_direction = 7-wind_direction  # opposite direction for reducing fire spread
+
+        rows, cols = grid.shape
+        for i in range(rows):
+            for j in range(cols):
+                if neighbourstates[wind_direction][i, j] in burning_states:
+                    burning_neighbours[i, j] += 1  # increase chance of ignition for wind coming from this direction
+
+                if neighbourstates[opposite_direction][i, j] in burning_states:
+                    burning_neighbours[i, j] -= 1  # decrease chance of ignition for wind going against this direction
+        
     ### Town rules: Burns if at least one burning neighbour, else survives
-    
     # if town and burning neighbours less than 1, survive
     town_survive = (burning_neighbours < 1) & (grid == 0)
     
