@@ -93,6 +93,13 @@ This puts a burning cell near the incinerator to start the wildfire spread towar
 ### 5. Running Intervention Scenarios
 
 #### Short-Term Intervention - Aerial Water Drop
+All the logic for this functionality is inside **forest.py**.
+
+The location of the water drop is selected inside the **get_water_intervention_matrix()** function. This function returns a matrix, where each element that is set to True indicates water being dropped there. 
+
+The frame at which the water gets dropped is stored inside the **INCINERATOR_START_WATER_DROP_TIME** and **POWER_PLANT_START_WATER_DROP_TIME** constants.
+
+If you want to simulate the incinerator starting the fire then **uncomment** the bottom matrix mutation and **comment** the top mutation in the **get_water_intervention_matrix()** function, and ensure the **INCINERATOR_START_WATER_DROP_TIME** constant is being used inside **transition_func()**, instead of **POWER_PLANT_START_WATER_DROP_TIME**. If you want to simulate, the power plant starting the fire, then do the opposite.
 
 #### Long-Term Intervention - Extended Dense Forest
 The modified initial grid with an extended dense forest is controlled in **forest.py** inside the **setup()** function.
