@@ -2,7 +2,7 @@ import tkinter as tk
 from capyle.guicomponents import _ConfigUIComponent
 from capyle.utils import is_valid_integer
 
-
+# Wind Direction UI component
 class _WindDirectionUI(tk.Frame, _ConfigUIComponent):
     DEFAULT = ''
 
