@@ -19,10 +19,25 @@ import numpy as np
 frame_counter = 0
 
 
+# each cell is 1.25km length
+# water can be dropped over 12.5km squared
+# 2.5km x 5km - 2 cells x 4 cells
+# 1.25 x 10km - 1 cell  x 10 cells
+
+POWER_PLANT_START_WATER_DROP_TIME = 30 # top left
+INCINERATOR_START_WATER_DROP_TIME = 33 # top right
+
 def get_water_intervention_matrix():
     matrix = np.full((40, 40), False, dtype=bool)
-    matrix[4, 10] = True
-    matrix[4, 11] = True
+    # power plant
+    matrix[26:28, 0:5] = True 
+    
+    # incinerator
+    # without water intervention we have 43.4
+    # matrix[28:32, 18:20] = True # best for incinerator
+    # matrix[28:32, 19:21] = True # kind of the same
+    # matrix[30:32, 17:21] = True # best for incinerator
+    
     return matrix
 
 
@@ -160,20 +175,25 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     burned_town_survive = (grid == 13)
 
     #Handle Water Intervention
+    
+    global frame_counter
+    frame_counter+=1
+    
+    if(frame_counter == INCINERATOR_START_WATER_DROP_TIME):
 
-    water_intervention = get_water_intervention_matrix()
+        water_intervention = get_water_intervention_matrix()
 
-    dense_forest_survive = dense_forest_survive | (burning_dense_forest_survive & water_intervention) 
-    burning_dense_forest_survive = burning_dense_forest_survive & ~water_intervention
-    dense_forest_ignite = dense_forest_ignite & ~water_intervention
+        dense_forest_survive = dense_forest_survive | (burning_dense_forest_survive & water_intervention) 
+        burning_dense_forest_survive = burning_dense_forest_survive & ~water_intervention
+        dense_forest_ignite = dense_forest_ignite & ~water_intervention
 
-    chaparral_survive = chaparral_survive | (burning_chaparral_survive & water_intervention) 
-    burning_chaparral_survive = burning_chaparral_survive & ~water_intervention
-    chaparral_ignite = chaparral_ignite & ~water_intervention
+        chaparral_survive = chaparral_survive | (burning_chaparral_survive & water_intervention) 
+        burning_chaparral_survive = burning_chaparral_survive & ~water_intervention
+        chaparral_ignite = chaparral_ignite & ~water_intervention
 
-    canyon_survive = canyon_survive | (burning_canyon_survive & water_intervention) 
-    burning_canyon_survive = burning_canyon_survive & ~water_intervention
-    canyon_ignite = canyon_ignite & ~water_intervention
+        canyon_survive = canyon_survive | (burning_canyon_survive & water_intervention) 
+        burning_canyon_survive = burning_canyon_survive & ~water_intervention
+        canyon_ignite = canyon_ignite & ~water_intervention
 
     ######################################################################################
     
@@ -302,8 +322,8 @@ def setup(args):
     initial_grid[0:40, 0:40] = 4  # chapparral
 
     #Define Ignition Points
-    initial_grid[1, 4] = 9  # powerplant as ignition point
-    #initial_grid[1, 39] = 9  # incinerator as ignition point
+    # initial_grid[1, 4] = 9  # powerplant as ignition point
+    initial_grid[1, 39] = 9  # incinerator as ignition point
 
     # Set up initial conditions
     initial_grid[0, 4] = 5  # powerplant
