@@ -32,9 +32,10 @@ def get_water_intervention_matrix():
     # power plant
     matrix[26:28, 0:5] = True 
     
+    
+    # incinerator
     # tried placing the water down straight away, frame 2
-    # 40% chance fire doesnt make ti. But otherwise it doesnt give any real difference
-    # 40 percent chance of the fire never making it
+    # 40% chance fire wont reach the town. But otherwise it doesnt give any real difference
     matrix[1:3, 35:40] = True 
     return matrix
 
