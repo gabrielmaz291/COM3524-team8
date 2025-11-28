@@ -4,7 +4,7 @@ from capyle.utils import is_valid_integer
 
 
 class _WindDirectionUI(tk.Frame, _ConfigUIComponent):
-    DEFAULT = 0
+    DEFAULT = ''
 
     def __init__(self, parent):
         """Create and populate the wind directions ui"""
@@ -18,14 +18,19 @@ class _WindDirectionUI(tk.Frame, _ConfigUIComponent):
         self.set_default()
         self.wind_entry.pack(side=tk.LEFT)
 
+    #Allow values as integers (to add wind directional bias) or None (no wind)
     def get_value(self):
         x = self.wind_entry.get()
         if x == '':
-            x = 0
-        return int(x)
+            return None
+
+        try:
+            return int(x)
+        except (ValueError, TypeError):
+            return None
 
     def set_default(self):
-        self.set(self.DEFAULT)
+        self.wind_entry.delete(0, tk.END)
 
     def set(self, value):
         super(_WindDirectionUI, self).set(entry=self.wind_entry, value=value)
