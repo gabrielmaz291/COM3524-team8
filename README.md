@@ -2,7 +2,7 @@
 
 This repository contains the adapted Cellular Automata (CA) model used to simulate wildfire spread across heterogenous terrain, based on the COM3524 "Bio-Inspired Computing" assignment brief.
 
-This project investigates how fire spreads from two industrial ignition sources, a power plant and an incinerator, towards a nearby town, under different terrains such as dense forest, canyon, chapparal, and water.
+This project investigates how fire spreads from two industrial ignition sources, a power plant and an incinerator, towards a nearby town, under different terrains such as dense forest, canyon, chaparral, and water.
 
 ## Files Modified throughout Project
 - **forest.py** (CAPyle_releaseV2/release/ca_descriptions/forest.py)
@@ -10,7 +10,7 @@ This project investigates how fire spreads from two industrial ignition sources,
 The following CAPyle files were minimally modified to support optional wind settings in the CA Tool UI:
 - **winddirectionui.py** (CAPyle_releaseV2\release\capyle\guicomponents\winddirectionui.py)
 - **configframe.py** (CAPyle_releaseV2\release\capyle\guicomponents\configframe.py)
-- **grid2d.py** (CAPyle_releaseV2\release\capyle\ca\grid2.py)
+- **grid2d.py** (CAPyle_releaseV2\release\capyle\ca\grid2d.py)
 
 ## Prerequisites
 To run the simulation, you need:
@@ -21,7 +21,7 @@ To run the simulation, you need:
 - `pip` (Python package manager for installing necessary dependencies)
 - Git (to clone this repository)
 
-## Running the Simulation (Using CAPlye GUI)
+## Running the Simulation (Using CAPyle GUI)
 
 ### 1. Launch the tools menu
 Inside the COM3524 container, run:
@@ -79,7 +79,7 @@ this indicates that the configuration did not load correctly. To fix this, reope
 ### 3. Choosing the Ignition Scenario
 The ignition point is controlled in **forest.py** inside the **setup()** function.
 
-Both igntion scenarios (power plant and incinerator) are already defined.
+Both ignition scenarios (power plant and incinerator) are already defined.
 
 To select which scenario to run, simply **uncomment** the ignition point you want to enable and **comment out** the other.
 
@@ -94,7 +94,7 @@ Ensure you have:
 ```bash
 initial_grid[1, 4] = 9
 ```
-This puts a burning cell near the power plant to start the wildfire spread towards town.
+This puts a burning cell near the power plant to start the wildfire spread towards the town.
 
 #### Incinerator Ignition (Scenario 2)
 Ensure you have:
@@ -118,7 +118,7 @@ Leave the box **empty** (the value will be treated as None)
 - With Wind: 
 Enter any value from **0-7**, corresponding to the 8 Moore neighbourhood directions. 
 
-These directions indicate the direction where is wind coming from not where it is pointing to:
+These indicate the direction where wind is coming from not where it is pointing to:
 
 - 0: NW(North-West)
 - 1: N(North)
@@ -136,12 +136,11 @@ All the logic for this functionality is inside **forest.py**.
 
 The location of the water drop is selected inside the **get_water_intervention_matrix()** function. This function returns a matrix, where each element that is set to True indicates water being dropped there. 
 
-The frame at which the water gets dropped is stored inside the constants:
+The frame at which the water drop occurs is stored inside these constants:
 - **INCINERATOR_START_WATER_DROP_TIME**
 - **POWER_PLANT_START_WATER_DROP_TIME**
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
-
   <img src="CAPyle_releaseV2/release/screenshots/README/WaterDrop.png" width="500" style="border-radius: 8px;">
 </div>
 
@@ -149,19 +148,19 @@ By default, both water-drop regions are deactivated.
 To simulate the corresponding water-drop region from the ignition point of:
 
 1. Incinerator
-- **Uncomment** the bottom matrix mutation in the **get_water_intervention_matrix()** function
+- **Uncomment** the bottom matrix modification in the **get_water_intervention_matrix()** function
 - Ensure the **INCINERATOR_START_WATER_DROP_TIME** constant is being used inside **transition_func()**, instead of **POWER_PLANT_START_WATER_DROP_TIME**. 
 
 2. Power Plant
-- **Uncomment** the top matrix mutation in the **get_water_intervention_matrix()** function
+- **Uncomment** the top matrix modification in the **get_water_intervention_matrix()** function
 - Ensure the **POWER_PLANT_START_WATER_DROP_TIME** constant is being used inside **transition_func()**, instead of **INCINERATOR_START_WATER_DROP_TIME**. 
 
 #### Long-Term Intervention - Extended Dense Forest
 The modified initial grid with an extended dense forest is controlled in **forest.py** inside the **setup()** function.
 
-The conditions of the modified grid is already defined.
+The conditions of the modified grid are already defined.
 
-To select this grid, simply **uncomment** the addition dense forest definitions.
+To select this grid, simply **uncomment** the additional dense forest definitions.
 
 <div style="display: flex; align-items: flex-start; gap: 1rem;">
 
