@@ -1,4 +1,4 @@
-# Name: Conway's game of life
+# Name: Forest Fire CA Modelling
 # Dimensions: 2
 
 # --- Set up executable path, do not edit ---
@@ -24,18 +24,19 @@ INCINERATOR_START_WATER_DROP_TIME = 2 # top right
 
 def get_water_intervention_matrix():
     matrix = np.full((40, 40), False, dtype=bool)
-    
-    # power plant
+
+    # Both water-drop regions left DISABLED by default
+    # Uncomment one of the below to enable water drop at that location
+
+    # Power Plant water drop
     # matrix[26:28, 0:5] = True 
     
-    # incinerator
+    # Incinerator water drop
     # matrix[1:3, 35:40] = True 
     
     return matrix
 
-
-
-def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
+def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = None):
     
     # town == states == 0, water == states == 1, dense_forest == states == 2, canyon == states == 3,
     # chaparral == states == 4, powerplant == states == 5, incinerator == states == 6,burning_dense_forest == states == 7,
@@ -57,18 +58,32 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     # Burned chaparral - 0.75,0.75,0.75
     # Burned town - 1,0,0
 
-    # properly unpack states
+    # Unpack states
     town, water, dense_forest, canyon, chaparral, powerplant, incinerator, burning_dense_forest, burning_canyon, burning_chaparral, burned_dense_forest, burned_canyon, burned_chaparral, burned_town = neighbourcounts
 
-    # unpack state counts for clarity
+    # Unpack state counts for clarity
     #alive_neighbours, burning_neighbours, burned_neighbours= neighbourcounts
     alive_neighbours = town + water + dense_forest + canyon + chaparral
     
-    # Powerplant and Incinerator considered burning neighbours for purposes of igniting surroundings
+    # Burning neighbours
     burning_neighbours = burning_dense_forest + burning_canyon + burning_chaparral
     burned_neighbours = burned_dense_forest + burned_canyon + burned_chaparral + burned_town
+
+    # Directional Wind Bias Implementation
+    if wind_direction is not None:
+        burning_states = [7, 8, 9]  # burning_dense_forest, burning_canyon, burning_chaparral
+        opposite_direction = 7-wind_direction  # opposite direction for reducing fire spread
+
+        rows, cols = grid.shape
+        for i in range(rows):
+            for j in range(cols):
+                if neighbourstates[wind_direction][i, j] in burning_states:
+                    burning_neighbours[i, j] += 1  # increase chance of ignition for wind coming from this direction
+
+                if neighbourstates[opposite_direction][i, j] in burning_states:
+                    burning_neighbours[i, j] -= 1  # decrease chance of ignition for wind going against this direction
+        
     ### Town rules: Burns if at least one burning neighbour, else survives
-    
     # if town and burning neighbours less than 1, survive
     town_survive = (burning_neighbours < 1) & (grid == 0)
     
@@ -167,8 +182,8 @@ def transition_func(grid, neighbourstates, neighbourcounts, wind_direction = 0):
     # if burned town, survives
     burned_town_survive = (grid == 13)
 
-    #Handle Water Intervention
-    
+    #Short-term Intervention - Aerial Water Drop
+
     global frame_counter
     frame_counter+=1
     
@@ -315,8 +330,8 @@ def setup(args):
     initial_grid[0:40, 0:40] = 4  # chapparral
 
     #Define Ignition Points
-    # initial_grid[1, 4] = 9  # powerplant as ignition point
-    initial_grid[1, 39] = 9  # incinerator as ignition point
+    initial_grid[1, 4] = 9  # powerplant as ignition point
+    # initial_grid[1, 39] = 9  # incinerator as ignition point
 
     # Set up initial conditions
     initial_grid[0, 4] = 5  # powerplant

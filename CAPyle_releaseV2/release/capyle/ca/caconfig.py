@@ -32,10 +32,6 @@ class CAConfig(object):
         if self.num_generations is None:
             self.num_generations = 100
 
-        # wind direction
-        if ((self.title == "Forest fire") & (self.wind_direction is None)):
-            self.wind_direction = 0
-
         # grid dimensions
         if self.grid_dims is None:
             if self.dimensions == 2:
