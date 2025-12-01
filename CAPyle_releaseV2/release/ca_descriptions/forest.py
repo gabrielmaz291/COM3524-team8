@@ -19,7 +19,7 @@ import numpy as np
 frame_counter = 0
 
 
-POWER_PLANT_START_WATER_DROP_TIME = 2 # top left
+POWER_PLANT_START_WATER_DROP_TIME = 30 # top left
 INCINERATOR_START_WATER_DROP_TIME = 2 # top right
 
 def get_water_intervention_matrix():
