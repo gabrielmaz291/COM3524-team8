@@ -19,23 +19,18 @@ import numpy as np
 frame_counter = 0
 
 
-# each cell is 1.25km length
-# water can be dropped over 12.5km squared
-# 2.5km x 5km - 2 cells x 4 cells
-# 1.25 x 10km - 1 cell  x 10 cells
-
-POWER_PLANT_START_WATER_DROP_TIME = 30 # top left
+POWER_PLANT_START_WATER_DROP_TIME = 2 # top left
 INCINERATOR_START_WATER_DROP_TIME = 2 # top right
 
 def get_water_intervention_matrix():
     matrix = np.full((40, 40), False, dtype=bool)
-    # power plant
-    matrix[26:28, 0:5] = True 
     
-    # tried placing the water down straight away, frame 2
-    # 40% chance fire doesnt make ti. But otherwise it doesnt give any real difference
-    # 40 percent chance of the fire never making it
-    matrix[1:3, 35:40] = True 
+    # power plant
+    # matrix[26:28, 0:5] = True 
+    
+    # incinerator
+    # matrix[1:3, 35:40] = True 
+    
     return matrix
 
 
